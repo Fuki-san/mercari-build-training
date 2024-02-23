@@ -23,6 +23,7 @@ const (
 	ImgDir = "images"
 	JsonFile = "items.json"
 )
+//
 type Item struct {
 	Name string `json:"name"`
 	Category string `json:"category"`
