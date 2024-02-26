@@ -4,19 +4,13 @@ FROM golang:1.22-alpine
 RUN apk add --no-cache gcc musl-dev sqlite-dev
 # Create user and group
 RUN addgroup -S mercari && adduser -S trainee -G mercari
-# Set the working directory to /app
 #copy(src,dst)で(local、image)なのでcopyの第一引数の . はビルドコンテキスト
 #第二引数の . は WORKDIRで定めたルートカレントディレクトリ
 WORKDIR /go
 # Copy the Go application directory
 COPY . .
 WORKDIR /go/app
-# COPY ./app/ .
-# WORKDIR /go/db
-# COPY ./db/mercari.sqlite3 .
-# # Change the working directory to the Go application directory
-# WORKDIR /go/app/
-# Build the application
+
 RUN mkdir -p /go/images
 RUN chown -R trainee:mercari /go/images
 
