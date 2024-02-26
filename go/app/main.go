@@ -115,7 +115,7 @@ func main() {
 		AllowOrigins: []string{frontURL},
 		AllowMethods: []string{http.MethodGet, http.MethodPut, http.MethodPost, http.MethodDelete},
 	}))
-	//db := InitDB() <- good connect-DB-code better than sqlOpen() in more complex situation
+	///db := InitDB() <- good connect-DB-code better than sqlOpen() in more complex situation
 	db, err := sqlOpen()
 	if err != nil {
 		//%v can be putted any data-type,%s is string-type only though
