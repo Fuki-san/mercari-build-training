@@ -1,8 +1,29 @@
-FROM alpine
-
+# syntax=docker/dockerfile:1
+FROM golang:1.22-alpine
+# Install dependencies
+RUN apk add --no-cache gcc musl-dev sqlite-dev
+# Create user and group
 RUN addgroup -S mercari && adduser -S trainee -G mercari
-# RUN chown -R trainee:mercari /path/to/db
+# Set the working directory to /app
+#copy(src,dst)で(local、image)なのでcopyの第一引数の . はビルドコンテキスト
+#第二引数の . は WORKDIRで定めたルートカレントディレクトリ
+WORKDIR /go
+# Copy the Go application directory
+COPY . .
+WORKDIR /go/app
+# COPY ./app/ .
+# WORKDIR /go/db
+# COPY ./db/mercari.sqlite3 .
+# # Change the working directory to the Go application directory
+# WORKDIR /go/app/
+# Build the application
+RUN mkdir -p /go/images
+RUN chown -R trainee:mercari /go/images
 
+RUN go build -o /build2024
+# Expose the application port
+EXPOSE 9000
+# Set the default command
+CMD ["/build2024"]
+# Run as non-root user
 USER trainee
-
-CMD ["go", "version"]
