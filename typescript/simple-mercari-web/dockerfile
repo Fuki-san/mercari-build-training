@@ -4,4 +4,6 @@ WORKDIR /app
 RUN addgroup -S mercari && adduser -S trainee -G mercari
 USER trainee
 
+EXPOSE 3000
+
 CMD ["node", "-v"]
