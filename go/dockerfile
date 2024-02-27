@@ -9,12 +9,11 @@ RUN addgroup -S mercari && adduser -S trainee -G mercari
 WORKDIR /go
 # Copy the Go application directory
 COPY . .
-# WORKDIR /go/app
 
 RUN mkdir -p /go/images
 RUN chown -R trainee:mercari /go/images
 #/goのところでbuild
-RUN go build -o /build2024 .
+RUN go build -o /build2024 ./app
 # Expose the application port
 EXPOSE 9000
 # Set the default command
