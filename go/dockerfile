@@ -13,6 +13,7 @@ COPY . .
 RUN mkdir -p /go/images
 RUN chown -R trainee:mercari /go/images
 #/goのところでbuild
+#./appは、image構造のgofileもつやつ
 RUN go build -o /build2024 ./app
 # Expose the application port
 EXPOSE 9000
