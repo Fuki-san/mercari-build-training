@@ -118,6 +118,7 @@ func searchItems(c echo.Context) error {
 
 	if err != nil {
 		c.Logger().Errorf("db.Query error")
+		return err
 	}
 	defer rows.Close()
 	//get items matched it

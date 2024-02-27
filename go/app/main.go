@@ -123,10 +123,15 @@ func main() {
 	}
 	defer db.Close()
 	// e.GET("/", root)
+	//curl -X POST --url "http://localhost:9000/items" -F "name=jacket" -F "category=fashion" -F "image=@/mnt/c/Users/ff102/mercari/mercari-build-training//go/images/default.jpg"
 	e.POST("/items", addItem(db))
+	//curl http://localhost:9000/items
 	e.GET("/items",getItems)
+	//curl -X GET 'http://localhost:9000/image/default.jpg' -o output.jpg
 	e.GET("/image/:imageFilename", getImg)
+	//curl http://localhost:9000/items/3
 	e.GET("/items/:item_id", getItemByItemId(db))
+	// curl http://localhost:9000/search?keyword=jacket
 	e.GET("/search",searchItems)
 	// Start server
 	e.Logger.Fatal(e.Start(":9000")) 
