@@ -13,6 +13,7 @@ WORKDIR /go/app/app
 
 # RUN mkdir -p /go/app/images
 RUN chown -R trainee:mercari /go/app/images
+RUN chown -R trainee:mercari /go/app/db
 RUN go mod download
 RUN go build -o /build2024 .
 # Expose the application port
