@@ -6,15 +6,15 @@ RUN apk add --no-cache gcc musl-dev sqlite-dev
 RUN addgroup -S mercari && adduser -S trainee -G mercari
 #copy(src,dst)で(local、image)なのでcopyの第一引数の . はビルドコンテキスト
 #第二引数の . は WORKDIRで定めたルートカレントディレクトリ
-WORKDIR /go
+WORKDIR /go/app
 # Copy the Go application directory
 COPY . .
+WORKDIR /go/app/app
 
-RUN mkdir -p /go/images
-RUN chown -R trainee:mercari /go/images
-#/goのところでbuild
-#./appは、image構造のgofileもつやつ
-RUN go build -o /build2024 ./app
+# RUN mkdir -p /go/app/images
+RUN chown -R trainee:mercari /go/app/images
+RUN go mod download
+RUN go build -o /build2024 .
 # Expose the application port
 EXPOSE 9000
 # Set the default command

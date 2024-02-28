@@ -1,9 +1,9 @@
 package main
 
 const (
-	ImgDir = "images"
+	ImgDir = "../images"
 	JsonFile = "items.json"
-	Sqlpath = "db/mercari.sqlite3"
+	Sqlpath = "../db/mercari.sqlite3"
 )
 
 type Response struct {
