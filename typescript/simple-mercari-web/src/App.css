@@ -3,7 +3,8 @@
 }
 
 .Title {
-  background-color: #222427;
+  /* background-color: #222427; */
+  background-color: #ffd5d5;
   min-height: 8vh;
   display: flex;
   flex-direction: column;

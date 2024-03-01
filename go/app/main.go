@@ -113,7 +113,10 @@ func main() {
 	}
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
 		AllowOrigins: []string{frontURL},
+		// AllowOrigins: []string{"*"},
+		// AllowOrigins: []string{"http://localhost:3000"},
 		AllowMethods: []string{http.MethodGet, http.MethodPut, http.MethodPost, http.MethodDelete},
+        // AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
 	}))
 	///db := InitDB() <- good connect-DB-code better than sqlOpen() in more complex situation
 	db, err := sqlOpen()

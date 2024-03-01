@@ -32,6 +32,7 @@ export const ItemList: React.FC<Prop> = (props) => {
       .then(data => {
         console.log('GET success:', data);
         setItems(data.items);
+        // setItems(data);
         onLoadCompleted && onLoadCompleted();
       })
       .catch(error => {
@@ -47,11 +48,15 @@ export const ItemList: React.FC<Prop> = (props) => {
 
   return (
     <div>
-      {items.map((item) => {
+      {/* console.log('WHAT items', items) */}
+      {/* console.log(items) */}
+      {Array.isArray(items) && items.map((item) => {
+      // const imageUrl = `${server}/image/${item.image_name}`;
         return (
           <div key={item.id} className='ItemList'>
             {/* TODO: Task 1: Replace the placeholder image with the item image */}
-            <img src={placeholderImage} />
+            <img src={placeholderImage} alt={item.name} />
+            {/* <img src={imageUrl} alt={item.name} /> */}
             <p>
               <span>Name: {item.name}</span>
               <br />

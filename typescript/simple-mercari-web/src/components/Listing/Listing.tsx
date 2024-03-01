@@ -19,6 +19,7 @@ export const Listing: React.FC<Prop> = (props) => {
     category: "",
     image: "",
   };
+  
   const [values, setValues] = useState<formDataType>(initialState);
 
   const onValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {

@@ -17,3 +17,14 @@ type Item struct {
 	CategoryID int `db:"category_id"`
 	CategoryName string `db:"category_name"`
 }
+type ResponseItem struct {
+	Id int `json:"id"`
+	Name string `json:"name"`
+	Category string `json:"category"`
+	Image_name string `json:"image_name"`
+}
+type ResponseItems struct {
+    Items []ResponseItem `json:"items"`
+}
+
+// Id int  `json:"id,omitempty
