@@ -44,7 +44,9 @@ export const ItemList: React.FC<Prop> = (props) => {
     if (reload) {
       fetchItems();
     }
-  }, [reload]);
+    //useEffectの第二引数(依存関係配列)にfetchItemsを入れることで、この関数を変更されたときに、fetchItemsで取得データの変更などが
+    //コンポーネントに反映されるイメージ。
+  }, [reload,fetchItems]);
 
   return (
     <div>
