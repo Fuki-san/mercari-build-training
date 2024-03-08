@@ -113,9 +113,12 @@ func main() {
 	}
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
 		AllowOrigins: []string{frontURL},
+		// AllowOrigins: []string{"*"},
+		// AllowOrigins: []string{"http://localhost:3000"},
 		AllowMethods: []string{http.MethodGet, http.MethodPut, http.MethodPost, http.MethodDelete},
+        // AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
 	}))
-	//db := InitDB() <- good connect-DB-code better than sqlOpen() in more complex situation
+	///db := InitDB() <- good connect-DB-code better than sqlOpen() in more complex situation
 	db, err := sqlOpen()
 	if err != nil {
 		//%v can be putted any data-type,%s is string-type only though
@@ -123,10 +126,15 @@ func main() {
 	}
 	defer db.Close()
 	// e.GET("/", root)
+	//curl -X POST --url "http://localhost:9000/items" -F "name=jacket" -F "category=fashion" -F "image=@/mnt/c/Users/ff102/mercari/mercari-build-training//go/images/default.jpg"
 	e.POST("/items", addItem(db))
+	//curl http://localhost:9000/items
 	e.GET("/items",getItems)
+	//curl -X GET 'http://localhost:9000/image/default.jpg' -o output.jpg
 	e.GET("/image/:imageFilename", getImg)
+	//curl http://localhost:9000/items/3
 	e.GET("/items/:item_id", getItemByItemId(db))
+	// curl http://localhost:9000/search?keyword=jacket
 	e.GET("/search",searchItems)
 	// Start server
 	e.Logger.Fatal(e.Start(":9000")) 

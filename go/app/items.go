@@ -68,7 +68,9 @@ func getItems (c echo.Context) error {
 		}
 		defer db.Close()
 		//get db-date(return sql.Rows object)
-		cmd := "SELECT items.name, categories.name, items.image_name FROM items JOIN categories ON items.category_id = categories.id"
+		// cmd := "SELECT items.id ,items.name, categories.name, items.image_name FROM items JOIN categories ON items.category_id = categories.id"
+		cmd := "SELECT items.id, items.name, categories.name AS category, items.image_name FROM items JOIN categories ON items.category_id = categories.id"
+
 		// cmd := "SELECT items.name, categories.name, items.image_name FROM items JOIN categories ON items.category_id = categories.id"
 		rows, err := db.Query(cmd)
 		if err != nil {
@@ -77,12 +79,15 @@ func getItems (c echo.Context) error {
 		}
 		defer rows.Close()
 		//get db-date into item
-		var items []Item
+		// var items []Item
+		var items []ResponseItem
 		for rows.Next() {
 			//declare item instance for storage
-			var item Item
+			// var item Item
+			var item ResponseItem
 			//store rows-date to item-field
-			if err := rows.Scan(&item.Name,&item.CategoryName,&item.ImageName); err != nil{
+			// if err := rows.Scan(&item.Name,&item.CategoryName,&item.ImageName); err != nil{
+			if err := rows.Scan(&item.Id, &item.Name, &item.Category, &item.Image_name); err != nil{
 				c.Logger().Errorf("rows.Scan: rows-date storing error")
 				return err
 			}
@@ -95,7 +100,13 @@ func getItems (c echo.Context) error {
 		}
 		
 		// return rows-date
-		return c.JSON(http.StatusOK, items)
+		// c.Logger().Errorf("Array %v", ResponseItems{Items: items})
+		// fmt.Printf("Array %v", ResponseItems{Items: items})
+		//こっちだとPrototypeがobjectで送っていて、
+		//Uncaught TypeErrorが起きない
+		return c.JSON(http.StatusOK, ResponseItems{Items: items})
+		//↓こっちだとPrototypeが配列で送っている
+		// return c.JSON(http.StatusOK, items)
 }
 
 func searchItems(c echo.Context) error {
@@ -118,6 +129,7 @@ func searchItems(c echo.Context) error {
 
 	if err != nil {
 		c.Logger().Errorf("db.Query error")
+		return err
 	}
 	defer rows.Close()
 	//get items matched it

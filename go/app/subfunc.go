@@ -41,6 +41,9 @@ func ImgSave(image *multipart.FileHeader)(string, error) {
 			return "", fmt.Errorf("failed to seek file: %v", err)
 		}
 		//create file path
+		fmt.Printf("ImgDir: %v",ImgDir)
+		fmt.Printf("Image_name: %v",image_name)
+		fmt.Printf("file_name: %v",filepath.Join(ImgDir, image_name))
 		dst, err := os.Create(filepath.Join(ImgDir, image_name))
 		if err != nil{
 			return "", fmt.Errorf("os.Create filepath.Join error: %v",err)
