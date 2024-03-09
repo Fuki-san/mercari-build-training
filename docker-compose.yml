@@ -1,0 +1,17 @@
+services:
+  server:
+    build: ./go
+    # image: ghcr.io/fuki-san/mercari-build-training:step6
+    container_name: web-server
+    ports:
+      - "9000:9000"
+  web:
+    build: ./typescript/simple-mercari-web/
+    environment:
+        - REACT_APP_API_URL=${REACT_APP_API_URL}
+    container_name: web-front
+    ports:
+      - "3000:3000"
+
+
+  
