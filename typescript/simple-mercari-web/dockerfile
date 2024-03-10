@@ -1,32 +1,31 @@
 #build-stage
 FROM node:20-alpine as builder
 WORKDIR /src
-#mercariグループ追加+ユーザーを追加,mercariグループに。-SはAlpine特有
-RUN addgroup -S mercari && adduser -S trainee -G mercari
-#追加したユーザーに所有権を
-RUN chown -R trainee:mercari /src
+
+RUN addgroup -S mercari && adduser -S trainee -G mercari \
+    && chown -R trainee:mercari /src
 #これ以降のdockerfileの命令はtraineeによるもの
 USER trainee
 
 #依存関係をインストール
 COPY package*.json ./
-RUN npm install
+RUN npm ci
 #build contextは、simple-mercari-web
 COPY ./ ./
 
 COPY tsconfig.json ./
 
-RUN npm run build 
-
-#run-stage
+RUN npm run build
+# run-stage
 FROM node:20-alpine
 WORKDIR /src
 
 #serve install
-RUN npm install -g serve
+# RUN npm install -g serve
 #copy buildfile in build-stagbe
 COPY --from=builder /src/build ./build
 
 EXPOSE 3000
 
-CMD ["serve", "-s", "build", "-p", "3000"]
+# CMD ["serve", "-s", "build", "-p", "3000"]
+CMD [ "npm", "start" ]

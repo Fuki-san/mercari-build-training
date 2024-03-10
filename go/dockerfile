@@ -15,10 +15,13 @@ WORKDIR /go/app/app
 RUN chown -R trainee:mercari /go/app/images
 RUN chown -R trainee:mercari /go/app/db
 RUN go mod download
-RUN go build -o /build2024 .
+# RUN go build -o /build2024 .
+RUN go build -o /mercari-build-training_server .
 # Expose the application port
 EXPOSE 9000
 # Set the default command
-CMD ["/build2024"]
+# CMD ["/build2024"]
+CMD [ "/mercari-build-training_server" ]
+# ENTRYPOINT ["/mercari-build-training_server"]
 # Run as non-root user
 USER trainee

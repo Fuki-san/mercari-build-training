@@ -57,8 +57,7 @@ export const ItemList: React.FC<Prop> = (props) => {
         return (
           <div key={item.id} className='ItemList'>
             {/* TODO: Task 1: Replace the placeholder image with the item image */}
-            <img src={placeholderImage} alt={item.name} />
-            {/* <img src={imageUrl} alt={item.name} /> */}
+            <img src={"http://localhost:9000/image/" + item.image_name} alt={item.image_name} />
             <p>
               <span>Name: {item.name}</span>
               <br />
