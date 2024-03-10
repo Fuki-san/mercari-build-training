@@ -12,33 +12,198 @@
   justify-content: left;
   font-size: calc(10px + 1vmin);
   color: white;
+  
 }
 
 .Listing {
-  background-color: #222427;
-  /* background-color: #ffd5d5; */
-  min-height: 8vh;
+  background-color: #ffd5d5;
+  min-height: 10vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: left;
+  justify-content: center;
   font-size: calc(10px + 1vmin);
   color: white;
+  padding-top: 20px;
+  margin-bottom: 20px;
 }
 
 .ItemList {
-  background-color: #222427;
+  background-color: #d2bd96;
   min-height: 8vh;
-  display: flex;
-  flex-direction: column;
+  padding: 30px;
+  box-shadow: 0 0 10px rgba(0, 0, 0,0.1);
   align-items: center;
-  justify-content: left;
+  justify-content: right;
+  display: flex;
   font-size: calc(10px + 1vmin);
-  color: white;
+  color: #d5c1b3;
+  flex-direction: column;
+}
+
+.Container{
+  background-color: rgba(255, 255, 255);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  row-gap: 10px;
+  column-gap: 10px;
+  background-color: #a97a53;
+  gap: 10px;
 }
 
 .App-link {
   color: #61dafb;
+}
+
+.cp_button07{
+  position: relative;
+	z-index: 1;
+	overflow: hidden;
+	width: 160px;
+	padding: 1em;
+	cursor: pointer;
+	line-height: 1.4;
+	transition: color 0.3s cubic-bezier(0.02,0.01,0.47,1),transform 0.3s cubic-bezier(0.02,0.01,0.47,1);
+	color: #ffffff;
+	border: none;
+	border-width: 0;
+	border-color: transparent;
+	border-radius: 100px;
+	background: #ff5e07;
+}
+
+.cp_button07:after, .cp_button07:before {
+	position: absolute;
+	z-index: -1;
+	right: 0;
+	bottom: 0;
+	width: 100px;
+	height: 100px;
+	content: '';
+	transition: transform 0.15s cubic-bezier(0.02,0.01,0.47,1),opacity 0.15s cubic-bezier(0.02,0.01,0.47,1);
+	-webkit-transform: translate(100%,-25%) translateZ(0);
+	transform: translate(100%,-25%) translateZ(0);
+	opacity: 0;
+	border-radius: 50%;
+	background: #009688;
+}
+.cp_button07:after, .cp_button07:before {
+	background: #ffffff;
+}
+.cp_button07:hover {
+	transition: all 0.5s cubic-bezier(0.02,0.01,0.47,1);
+	-webkit-transform: scale(1.1) translateZ(0);
+	transform: scale(1.1) translateZ(0);
+	color: #ffffff;
+	box-shadow: 0 1px 8px rgba(0,0,0,0.3);
+}
+.cp_button07:hover:before {
+	transition: transform 0.2s cubic-bezier(0.02,0.01,0.47,1),opacity 0.2s cubic-bezier(0.02,0.01,0.47,1);
+	-webkit-transform: translate3d(50%,0,0) scale(0.9);
+	transform: translate3d(50%,0,0) scale(0.9);
+	opacity: 0.15;
+}
+.cp_button07:hover:after {
+	transition: transform 0.2s cubic-bezier(0.02,0.01,0.47,1) 0.05s,opacity 0.2s cubic-bezier(0.02,0.01,0.47,1) 0.05s;
+	-webkit-transform: translate(50%) scale(1.1);
+	transform: translate(50%) scale(1.1);
+	opacity: 0.25;
+}
+.cp_button07:active {
+	opacity: 0.5;
+}
+.cp_button07:focus {
+	color: #ffffff;
+}
+
+.cp_iptxt,.addbtn {
+	position: relative;
+	width: 30%;
+	margin: 40px 3%;
+}
+.cp_iptxt input[type='text'] {
+	font: 15px/24px sans-serif;
+	box-sizing: border-box;
+	width: 100%;
+	letter-spacing: 1px;
+	padding-left: 1em;
+}
+.cp_iptxt input[type='text']:focus {
+	outline: none;
+}
+.ef {
+	padding: 7px 14px;
+	transition: 0.4s;
+	border: 1px solid #1b2538;
+	background: #fff;
+}
+.ef ~ .focus_line:before,
+.ef ~ .focus_line:after {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 0;
+	height: 2px;
+	content: '';
+	transition: 0.3s;
+	background-color: #da3c41;
+}
+.ef ~ .focus_line:after {
+	top: auto;
+	right: 0;
+	bottom: 0;
+	left: auto;
+}
+.ef ~ .focus_line i:before,
+.ef ~ .focus_line i:after {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 2px;
+	height: 0;
+	content: '';
+	transition: 0.4s;
+	background-color: #da3c41;
+}
+.ef ~ .focus_line i:after {
+	top: auto;
+	right: 0;
+	bottom: 0;
+	left: auto;
+}
+.ef:focus ~ .focus_line:before,
+.ef:focus ~ .focus_line:after,
+.cp_iptxt.ef ~ .focus_line:before,
+.cp_iptxt.ef ~ .focus_line:after {
+	width: 100%;
+	transition: 0.3s;
+}
+.ef:focus ~ .focus_line i:before,
+.ef:focus ~ .focus_line i:after,
+.cp_iptxt.ef ~ .focus_line i:before,
+.cp_iptxt.ef ~ .focus_line i:after {
+	height: 100%;
+	transition: 0.4s;
+}
+.ef ~ placeholder {
+	position: absolute;
+	z-index: -1;
+	top: 10px;
+	left: 14px;
+	width: 100%;
+	transition: 0.3s;
+	letter-spacing: 0.5px;
+	color: #aaaaaa;
+}
+.ef:focus ~ placeholder,
+.cp_iptxt.ef ~ placeholder {
+	font-size: 12px;
+	top: -18px;
+	left: 0;
+	transition: 0.3s;
+	color: #da3c41;
+}
+.input_all{
+  display: flex;
 }
 
 @keyframes App-logo-spin {
@@ -49,3 +214,61 @@
     transform: rotate(360deg);
   }
 }
+
+.item_box{
+  width: 10em;
+  padding: 15px;
+  margin: 2rem auto;
+  text-align: center;
+  background: #eebeeb;
+  color: #000;
+  box-shadow: 4px 4px 4px
+  rgba(0,0,0,0.03);transform: rotate(2deg);
+  word-break: break-all;
+}
+/* .item_box_tape{
+  width: 50%;
+  height: 35px;
+  margin: -27px auto 0;
+  background: #444444; 
+  transform: rotate(-3deg);
+  opacity: 0.1;
+} */
+.likeButton{
+  background-color: rgba(231, 76, 60, 1);
+  color: white;
+  padding: 0.8rem;
+  border-radius: 0.4rem;
+  cursor: pointer;
+}
+
+/* スマートフォンなどの小さなデバイス用のスタイル */
+@media (max-width: 600px) {
+  .Container {
+    grid-template-columns: 1fr; /* 1列のみに変更 */
+  }
+
+  .input_all{
+    flex-direction: column;
+  }
+  
+  /* 他にも必要に応じてスタイルを追加 */
+  .cp_iptxt, .addbtn {
+    width: 90%; /* 入力フィールドの幅を調整 */
+    margin: 20px auto; /* 上下のマージンを調整 */
+  }
+}
+
+/* タブレットなどの中くらいのデバイス用のスタイル */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .Container {
+    grid-template-columns: repeat(2, 1fr); /* 2列に変更 */
+  }
+  
+  /* 他にも必要に応じてスタイルを追加 */
+  .cp_iptxt, .addbtn {
+    width: 45%; /* 入力フィールドの幅を調整 */
+    margin: 20px; /* マージンを調整 */
+  }
+}
+
