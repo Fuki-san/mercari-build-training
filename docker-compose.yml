@@ -1,17 +1,32 @@
 services:
   server:
-    build: ./go
-    # image: ghcr.io/fuki-san/mercari-build-training:step6
+    image: mercari-build-training_server:latest
+    build: 
+      context: ./go
     container_name: web-server
+    volumes:
+      - ./go/db:/go/app/db
     ports:
       - "9000:9000"
-  web:
-    build: ./typescript/simple-mercari-web/
     environment:
-        - REACT_APP_API_URL=${REACT_APP_API_URL}
+      - FRONT_URL=http://localhost:3000
+  web:
+    image: mercari-build-training_web:latest
+    build: 
+      context: ./typescript/simple-mercari-web/
+    volumes:
+      - ./typescript/simple-mercari-web:/src
+      - /src/node_modules
+      # - node_modules_volume:/src/node_modules
+    environment:
+        - REACT_APP_API_URL=http://localhost:9000
+        - WATCHPACK_POLLING=true
     container_name: web-front
     ports:
       - "3000:3000"
-
-
+    depends_on:
+      - server
+#名前付きのvolumeをdockerホスト
+# volumes:
+#   node_modules_volume:
   

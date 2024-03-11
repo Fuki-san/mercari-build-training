@@ -7,7 +7,7 @@ interface Item {
   image_name: string;
 };
 
-const server = process.env.REACT_APP_API_URL || 'http://127.0.0.1:9000';
+const server = process.env.REACT_APP_API_URL || 'http://localhost:9000';
 const placeholderImage = process.env.PUBLIC_URL + '/logo192.png';
 
 interface Prop {
@@ -46,24 +46,40 @@ export const ItemList: React.FC<Prop> = (props) => {
     }
     //useEffectの第二引数(依存関係配列)にfetchItemsを入れることで、この関数を変更されたときに、fetchItemsで取得データの変更などが
     //コンポーネントに反映されるイメージ。
-  }, [reload,fetchItems]);
+  }, [reload]);
+
+  const Like = () => {
+    const [count, setCout] = useState(0);
+    const handleClick = () => {
+      setCout(count+1);
+    };
+    return(
+      <span className='likeButton' onClick={handleClick}>♡ {count}</span>
+    );
+  }
 
   return (
-    <div>
+    <div className='Container'>
       {/* console.log('WHAT items', items) */}
       {/* console.log(items) */}
-      {Array.isArray(items) && items.map((item) => {
-      // const imageUrl = `${server}/image/${item.image_name}`;
+      {items.map((item) => {
+      const imageUrl = `${server}/image/${item.image_name}`;
         return (
           <div key={item.id} className='ItemList'>
-            {/* TODO: Task 1: Replace the placeholder image with the item image */}
-            <img src={placeholderImage} alt={item.name} />
-            {/* <img src={imageUrl} alt={item.name} /> */}
-            <p>
-              <span>Name: {item.name}</span>
-              <br />
-              <span>Category: {item.category}</span>
-            </p>
+            <div className='item_box'>
+              <div className='item_box_tape'>
+                 {/* TODO: Task 1: Replace the placeholder image with the item image */}
+                <img src={imageUrl}  alt={placeholderImage} width="150" height="150" />
+                <p>
+                  <span>Name: {item.name}</span>
+                  <br />
+                  <span>Category: {item.category}</span>
+                  <br />
+                  <br />
+                  <span className='likebutton'><Like /></span>
+                </p>
+              </div>
+            </div>
           </div>
         )
       })}
