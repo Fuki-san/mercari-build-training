@@ -46,7 +46,7 @@ export const ItemList: React.FC<Prop> = (props) => {
     }
     //useEffectの第二引数(依存関係配列)にfetchItemsを入れることで、この関数を変更されたときに、fetchItemsで取得データの変更などが
     //コンポーネントに反映されるイメージ。
-  }, [reload,fetchItems]);
+  }, [reload]);
 
   const Like = () => {
     const [count, setCout] = useState(0);

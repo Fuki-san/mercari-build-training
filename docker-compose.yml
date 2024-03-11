@@ -4,6 +4,8 @@ services:
     build: 
       context: ./go
     container_name: web-server
+    volumes:
+      - ./go/db:/go/app/db
     ports:
       - "9000:9000"
     environment:
